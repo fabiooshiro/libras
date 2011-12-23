@@ -1,0 +1,9 @@
+{% if palavra_list %}
+    <ul>
+    {% for palavra in palavra_list %}
+        <li><a href="/polls/{{ palavra.id }}/">{{ palavra.palavra}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

@@ -1,0 +1,46 @@
+{% extends "dicionario/layout.html" %}
+{% block pretitle %}Obrigado - {% endblock %}
+{% block js %}
+    <script type="text/javascript">    
+        $(function(){
+        });
+    </script>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url dicionario.views.obrigado %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Envie uma palavra em libras</legend>
+            <div class="clearfix">
+                <label for="palavra.palavra">Palavra:</label>
+                <div class="input">
+                    <input id="palavra.palavra" name="palavra" type="text" class="xLarge" placeholder="Abelha" />
+                </div>
+            </div>
+            <div class="clearfix">
+                <label for="palavra.video_url">Url do Youtube:</label>
+                <div class="input">
+                    <input id="palavra.video_url" name="video_url" type="text" class="xLarge" placeholder="http://www.youtube.com/watch?v=nZW7ClneXQM" />
+                </div>
+            </div>
+            <div class="clearfix">
+                <label for="palavra.username">Nome ou Apelido:</label>
+                <div class="input">
+                    <input id="palavra.username" name="username" type="text" class="xLarge" placeholder="clemilson" />
+                </div>
+            </div>
+            <div class="clearfix">
+                <label for="palavra.email">E-mail:</label>
+                <div class="input">
+                    <input id="palavra.email" name="email" type="text" class="xLarge" placeholder="seu@email.com" />
+                </div>
+            </div>
+            <div class="actions">
+                <input type="submit" class="btn primary" value="enviar" />
+            </div>
+       </fieldset>
+    </form>
+{% endblock %}

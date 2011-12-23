@@ -1,0 +1,33 @@
+{% extends "dicionario/layout.html" %}
+{% block pretitle %}{{ mais_votada.palavra }} em Libras no {% endblock %}
+{% block js %}
+    <script type="text/javascript">    
+        $(function(){
+            {% if mais_votada %}
+                $("#ytapiplayer").vinilTube({ url: "{{ mais_votada.video_url }}", list: "lista", start: 0});
+            {% endif %}
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div id="ytapiplayer"></div>
+    {% if mais_votada %}
+        <div id="autor">
+            {{ mais_votada.username}}
+        </div>
+    {% endif %}
+
+
+    {% if palavra_list %}
+        <ul>
+        {% for palavra in palavra_list %}
+            <li><a href="/dicionario/{{ palavra.palavra }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sem palavras!</p>
+    {% endif %}
+    {% if mais_votada %}
+        <div class="fb-comments" data-href="http://libras.w3ca.com.br/dicionario/{{ mais_votada.palavra }}/" data-num-posts="2" data-width="530"></div>
+    {% endif %}
+{% endblock %}

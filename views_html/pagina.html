@@ -1,0 +1,14 @@
+{% extends "dicionario/layout.html" %}
+{% block pretitle %}{{ pagina.title }} - {% endblock %}
+{% block js %}
+    <script type="text/javascript">    
+        $(function(){
+        });
+    </script>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+    {{ pagina.content|safe }}
+{% endblock %}

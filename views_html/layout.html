@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block pretitle %}{% endblock %}Dicion&aacute;rio Colaborativo de Libras</title>
+        <link rel="stylesheet" href="/static/dicionario/css/bootstrap.min.css">
+        <link type="text/css" href="/static/dicionario/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />    
+        <script type="text/javascript" src="/static/dicionario/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/static/dicionario/js/jquery-ui-1.8.2.custom.min.js"></script>
+        <script type="text/javascript" src="/static/dicionario/js/swfobject.js"></script>
+        <script type="text/javascript" src="/static/dicionario/js/libras.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                var letra = '{{ letra }}'.toLowerCase();
+                $('#alfabeto a').each(function(){
+                    if($(this).text()==letra){
+                        $(this).parent().addClass('active');
+                    }
+                });
+                $('#menu').find('a[href="' + location.pathname + '"]').parent().addClass('active');
+            });
+        </script>
+        {% block js %}{% endblock %}
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="topbar" data-dropdown="dropdown">
+            <div class="topbar-inner">
+                <div class="container">
+                    <h3><a href="{% url dicionario.views.home %}">Dicion&aacute;rio de Libras</a></h3>
+                    <ul id="menu" class="nav">
+                        <li><a href="{% url dicionario.views.home %}">Home</a></li>
+                        <li><a href="{% url dicionario.views.pagina 'cursos' %}">Cursos</a></li>
+                        <li><a href="{% url dicionario.views.pagina 'interpretes-de-libras' %}">Int&eacute;rpretes</a></li>
+                        <li><a href="{% url dicionario.views.pagina 'quem-somos' %}">Quem Somos</a></li>
+                        <li><a href="{% url dicionario.views.colaborar %}">Colaborar</a></li>
+                        <!--
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Dropdown</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Secondary link</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Another link</a></li>
+                            </ul>
+                        </li>
+                        -->
+                    </ul>
+                    <form class="pull-left" action="{% url dicionario.views.search %}" method="get">
+                        <input type="text" name="q" placeholder="Procurar">
+                    </form>
+                    <!--
+                    <ul class="nav secondary-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Dropdown</a>
+                                    <ul class="dropdown-menu">
+                                    <li><a href="#">Secondary link</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Another link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    -->
+                </div>
+            </div><!-- /topbar-inner -->
+        </div><!-- /topbar -->
+        <div class="container">
+            <div class="content">
+                <div id="alfabeto" class="pagination" style="padding-top: 35px; text-transform: uppercase; font-size: .8em">
+                    <ul>
+                        <li><a href="/letra/a/">a</a></li>
+                        <li><a href="/letra/b/">b</a></li>
+                        <li><a href="/letra/c/">c</a></li>
+                        <li><a href="/letra/d/">d</a></li>
+                        <li><a href="/letra/e/">e</a></li>
+                        <li><a href="/letra/f/">f</a></li>
+                        <li><a href="/letra/g/">g</a></li>
+                        <li><a href="/letra/h/">h</a></li>
+                        <li><a href="/letra/i/">i</a></li>
+                        <li><a href="/letra/j/">j</a></li>
+                        <li><a href="/letra/k/">k</a></li>
+                        <li><a href="/letra/l/">l</a></li>
+                        <li><a href="/letra/m/">m</a></li>
+                        <li><a href="/letra/n/">n</a></li>
+                        <li><a href="/letra/o/">o</a></li>
+                        <li><a href="/letra/p/">p</a></li>
+                        <li><a href="/letra/q/">q</a></li>
+                        <li><a href="/letra/r/">r</a></li>
+                        <li><a href="/letra/s/">s</a></li>
+                        <li><a href="/letra/t/">t</a></li>
+                        <li><a href="/letra/u/">u</a></li>
+                        <li><a href="/letra/v/">v</a></li>
+                        <li><a href="/letra/w/">w</a></li>
+                        <li><a href="/letra/x/">x</a></li>
+                        <li><a href="/letra/y/">y</a></li>
+                        <li class="next"><a href="/letra/z/">z</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="sidebar">
+                    {% block sidebar %} 
+                        {% if palavra_side_list %}
+                            <table class="bordered-table zebra-striped">
+                                <thead>
+                                    <tr><th>Palavras iniciadas com <i style="text-transform: uppercase">{{ letra }}</i></th></tr>
+                                </thead>
+                                <tbody>
+                                    {% for palavra in palavra_side_list %}
+                                        <tr><td><a href="{% url dicionario.views.palavra palavra.palavra|escape %}">{{ palavra.palavra|escape }}</a></td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Sem palavras iniciando com esta letra.</p>
+                        {% endif %}
+                        <p>
+                            <a href="{% url dicionario.views.colaborar %}" class="btn small primary">Colaborar</a>
+                        </p>
+                    {% endblock %}
+                </div>
+                <div class="content">
+                    {% block content %}{% endblock %}
+                    <div style="position: fixed; bottom: 1px; left: 35%">
+                        <div class="fb-like" data-href="http://libras.w3ca.com.br/" data-send="true" data-width="450" data-show-faces="true"></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-19137516-2']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+    </body>
+</html>

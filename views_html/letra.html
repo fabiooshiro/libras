@@ -1,0 +1,12 @@
+{% extends "dicionario/layout.html" %}
+{% block palavras %}
+{% if palavra_list %}
+    <ul>
+    {% for palavra in palavra_list %}
+        <li><a href="/dicionario/{{ palavra.palavra }}/">{{ palavra.palavra}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Sem palavras iniciando com esta letra.</p>
+{% endif %}
+{% endblock %}
