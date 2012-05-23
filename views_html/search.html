@@ -19,7 +19,7 @@
     {% if palavra_list %}
         <ul>
         {% for palavra in palavra_list %}
-            <li><a href="/dicionario/{{ palavra.palavra }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
+            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
         {% endfor %}
         </ul>
     {% else %}

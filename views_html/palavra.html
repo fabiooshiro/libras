@@ -21,13 +21,13 @@
     {% if palavra_list %}
         <ul>
         {% for palavra in palavra_list %}
-            <li><a href="/dicionario/{{ palavra.palavra }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
+            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
         {% endfor %}
         </ul>
     {% else %}
         <p>Sem palavras!</p>
     {% endif %}
     {% if mais_votada %}
-        <div class="fb-comments" data-href="http://libras.w3ca.com.br/dicionario/{{ mais_votada.palavra }}/" data-num-posts="2" data-width="530"></div>
+        <div class="fb-comments" data-href="http://libras.w3ca.com.br/dicionario/{{ mais_votada.uri}}/" data-num-posts="2" data-width="530"></div>
     {% endif %}
 {% endblock %}

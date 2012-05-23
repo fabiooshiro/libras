@@ -4,6 +4,7 @@ from django.db import models
 class Palavra(models.Model):
     palavra = models.CharField(max_length=232)
     video_url = models.CharField(max_length=255)
+    uri = models.CharField(max_length=255)
     votes = models.IntegerField()
     username = models.CharField(max_length=232)
     email = models.CharField(max_length=255)
