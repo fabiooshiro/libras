@@ -14,25 +14,25 @@ def palavra(request, palavra):
     palavra_list = Palavra.objects.filter(uri__exact = palavra).order_by('votes')
     mais_votada = palavra_list[0]
     letra = mais_votada.palavra[0]
-    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact='ok').values('palavra', 'uri').distinct().order_by('palavra')
+    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact = 'ok').values('palavra', 'uri').distinct().order_by('palavra')
     return render_to_response('dicionario/palavra.html', {'palavra_side_list': palavra_side_list, 'palavra_list': palavra_list, 'mais_votada': mais_votada, 'letra': letra})
 
 def palavraid(request, palavra, palavra_id):
     palavra_list = Palavra.objects.filter(uri__exact = palavra).order_by('votes')
     mais_votada = Palavra.objects.get(id = palavra_id)
     letra = mais_votada.palavra[0]
-    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).values('palavra', 'uri').distinct().order_by('palavra')
+    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact = 'ok').values('palavra', 'uri').distinct().order_by('palavra')
     return render_to_response('dicionario/palavra.html', {'palavra_side_list': palavra_side_list, 'palavra_list': palavra_list, 'mais_votada': mais_votada, 'letra': letra})
 
 def letra(request, letra):
-    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact='ok').values('palavra', 'uri').distinct().order_by('palavra')
+    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact = 'ok').values('palavra', 'uri').distinct().order_by('palavra')
     return render_to_response('dicionario/letra.html', {'palavra_side_list': palavra_side_list, 'letra': letra})
 
 def search(request):
     crit = request.GET.get('q')
-    palavra_list = Palavra.objects.filter(palavra__istartswith = crit).filter(validacao__exact='ok').order_by('palavra')
+    palavra_list = Palavra.objects.filter(palavra__istartswith = crit).filter(validacao__exact = 'ok').order_by('palavra')
     letra = crit[0]
-    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact='ok').values('palavra', 'uri').distinct().order_by('palavra')    
+    palavra_side_list = Palavra.objects.filter(palavra__istartswith = letra).filter(validacao__exact = 'ok').values('palavra', 'uri').distinct().order_by('palavra')    
     return render_to_response('dicionario/search.html', {'palavra_list': palavra_list, 'letra': letra, 'palavra_side_list': palavra_side_list}) 
 
 def pagina(request, path):

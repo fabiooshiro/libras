@@ -1,4 +1,5 @@
 {% extends "dicionario/layout.html" %}
+{% load user_extras %}
 {% block pretitle %}{{ mais_votada.palavra }} em Libras no {% endblock %}
 {% block js %}
     <script type="text/javascript">    
@@ -21,7 +22,8 @@
     {% if palavra_list %}
         <ul>
         {% for palavra in palavra_list %}
-            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
+            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a>
+            {{ palavra.show_user }}</li>
         {% endfor %}
         </ul>
     {% else %}

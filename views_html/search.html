@@ -12,14 +12,14 @@
     <div id="ytapiplayer"></div>
     {% if mais_votada %}
         <div id="autor">
-            {{ mais_votada.username}}
+            {{ mais_votada.show_user}}
         </div>
     {% endif %}
 
     {% if palavra_list %}
         <ul>
         {% for palavra in palavra_list %}
-            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.username }}</li>
+            <li><a href="/dicionario/{{ palavra.uri }}/{{ palavra.id }}/">{{ palavra.palavra}}</a> {{ palavra.show_user }}</li>
         {% endfor %}
         </ul>
     {% else %}
